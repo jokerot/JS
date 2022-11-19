@@ -28,6 +28,11 @@ const countL = (x, y, matrix) => {
     return matrix[x][y]
 }
 
+const look = (x,y,matrix) => {
+    
+}
+
+
 const change = (matrix) => {
     const tempMatrix = [...matrix]
     return tempMatrix.map((x, xi) => x.split('').map((y, yi) => y == '.' ? '.' : countL(xi, yi, matrix)).join(''))
