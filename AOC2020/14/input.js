@@ -1,3 +1,8 @@
+export const sampleInput = `mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
+mem[8] = 11
+mem[7] = 101
+mem[8] = 0`
+
 export const realInput = `mask = 100X100X101011111X100000100X11010011
 mem[33323] = 349380
 mem[52742] = 116688965
