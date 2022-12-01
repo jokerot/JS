@@ -8,7 +8,7 @@ const solution = () => {
 
   for (let i = 8; i < 2021; i++) {
     last = current;
-    if (current.toString() in numbers) {
+    if (numbers[current]) {
       current = i - numbers[current];
     }
     else {
