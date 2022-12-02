@@ -3,7 +3,7 @@ const start = Date.now();
 
 let input = realInput.split('\n\n')
 
-let calories = input.map(x=>x.split('\n').reduce((sum, y) => +y + sum, 0))
+let calories = input.map(x => x.split('\n').reduce((sum, y) => +y + sum, 0))
 
 let topThreeSum = calories.sort().slice(-3).reduce((sum, y) => +y + sum, 0)
 
