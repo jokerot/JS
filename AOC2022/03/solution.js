@@ -1,5 +1,5 @@
 import { realInput, sampleInput } from "./input.js";
-const start = Date.now();
+// const start = Date.now();
 
 const chars = "#abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -20,8 +20,11 @@ const sol2 = (input) => {
     }
     return arr.reduce((s, x) => s + chars.indexOf(x), 0)
 }
-
+console.time('Part1')
 console.log("Part 1: ", sol1);
+console.timeEnd('Part1')
+console.time('Part2')
 console.log("Part 2: ", sol2(realInput.split('\n')));
+console.timeEnd('Part2')
 
-console.log("Time spent: ", Date.now() - start, " ms")
+// console.log("Time spent: ", Date.now() - start, " ms")
