@@ -11,7 +11,7 @@ const findBoth = (str) => {
     return intersection(firstHalf, arr)[0]
 }
 
-const sol1 = realInput.split('\n').map(x => chars.indexOf(findBoth(x))).reduce((s, y) => s + y, 0)
+const sol1 = (input) => input.split('\n').map(x => chars.indexOf(findBoth(x))).reduce((s, y) => s + y, 0)
 
 const sol2 = (input) => {
     const arr = []
@@ -21,7 +21,7 @@ const sol2 = (input) => {
     return arr.reduce((s, x) => s + chars.indexOf(x), 0)
 }
 console.time('Part1')
-console.log("Part 1: ", sol1);
+console.log("Part 1: ", sol1(realInput));
 console.timeEnd('Part1')
 console.time('Part2')
 console.log("Part 2: ", sol2(realInput.split('\n')));
