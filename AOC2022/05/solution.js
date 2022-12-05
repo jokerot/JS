@@ -4,10 +4,11 @@ const fillStacks = () => {
     const arrStacks = [[], [], [], [], [], [], [], [], []]
     stacks2.split('\n').forEach(element => {
         for (let i = 0; i <= 8; i++) {
-            if (element.slice(i * 4, i * 4 + 3).trim()) arrStacks[i] = [...arrStacks[i], element.slice(i * 4, i * 4 + 3)]
+            const crate = element.slice(i * 4, i * 4 + 3).trim()
+            if (crate) arrStacks[i].unshift(crate)
         }
     });
-    return arrStacks.map(x => x.reverse())
+    return arrStacks
 }
 
 const moves = realInput.split('\n').map(x => {
