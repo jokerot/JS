@@ -33,4 +33,8 @@ function isNumber(char) {
   return !isNaN(char);
 }
 
+//string is from unique chars
+
+const isUnique = m => ([...new Set(m.split(''))].join('') === m)
+
 isNaN //is not a number
