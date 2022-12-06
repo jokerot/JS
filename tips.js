@@ -19,3 +19,18 @@ const convertToBin = str => str.split('')
 
 //two arrays intersection
 const intersection = (array1, array2) => array1.filter(value => array2.includes(value))
+
+//check if character is a number
+function isNumber(char) {
+  if (typeof char !== 'string') {
+      return false;
+  }
+
+  if (char.trim() === '') {
+      return false;
+  }
+
+  return !isNaN(char);
+}
+
+isNaN //is not a number
