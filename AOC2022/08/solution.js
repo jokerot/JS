@@ -1,7 +1,7 @@
 import { realInput, sampleInput } from "./input.js";
 
 
-const array = sampleInput.split('\n').map(x => x.split(''))
+const array = realInput.split('\n').map(x => x.split(''))
 const rows = array.length
 const cols = array[0].length
 const transposed = array[0].map((_, colIndex) => array.map(row => row[colIndex]));
@@ -28,23 +28,25 @@ const visible = (arr, tarr) => {
 
 const scores = (x, y, arr) => {
     const tree = arr[x][y]
-    let [l, r, u, d] = [1, 1, 1, 1]
+    console.log(x, ",", y, "val:", tree)
+    let [l, r, u, d] = [0, 0, 0, 0]
     for (let i = 1; i <= y; i++) {
-        if (y > 0 && arr[x][y - i] < tree) l++
-        else break
+        l++
+        if (!(arr[x][y - i] < tree)) break
     }
     for (let i = y + 1; i < cols; i++) {
-        if (y < cols && arr[x][i] < tree) r++
-        else break
+        r++
+        if (!(arr[x][i] < tree))  break
     }
     for (let i = 1; i <= x; i++) {
-        if (x > 0 && arr[x - i][y] < tree) u++
-        else break
+        u++
+        if (!(arr[x - i][y] < tree)) break
     }
     for (let i = x + 1; i < rows; i++) {
-        if (x < rows && arr[i][y] < tree) d++
-        else break
+        d++
+        if (!(arr[i][y] < tree)) break
     }
+    console.log("l r u d:  ", l, r, u, d);
     return l * r * u * d
 }
 
@@ -56,6 +58,7 @@ const maxScore = () => {
             max = (max > s) ? max : s
         }
     }
+    return max
 }
 
 const sol1 = visible(array, transposed)
