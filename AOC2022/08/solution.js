@@ -11,10 +11,6 @@ const visible = (arr, tarr) => {
     for (let i = 1; i < rows - 1; i++) {
         for (let j = 1; j < cols - 1; j++) {
             const tree = arr[i][j]
-            const l = arr[i].slice(0, j)
-            const r = arr[i].slice(j + 1)
-            const u = tarr[j].slice(0, i)
-            const d = tarr[j].slice(i + 1)
 
             if (Math.max(...arr[i].slice(0, j)) < tree || Math.max(...arr[i].slice(j + 1)) < tree
                 || Math.max(...tarr[j].slice(0, i)) < tree || Math.max(...tarr[j].slice(i + 1)) < tree) {
@@ -28,7 +24,6 @@ const visible = (arr, tarr) => {
 
 const scores = (x, y, arr) => {
     const tree = arr[x][y]
-    console.log(x, ",", y, "val:", tree)
     let [l, r, u, d] = [0, 0, 0, 0]
     for (let i = 1; i <= y; i++) {
         l++
@@ -46,7 +41,6 @@ const scores = (x, y, arr) => {
         d++
         if (!(arr[i][y] < tree)) break
     }
-    console.log("l r u d:  ", l, r, u, d);
     return l * r * u * d
 }
 
