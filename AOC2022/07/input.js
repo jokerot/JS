@@ -1,7 +1,6 @@
 
 
-export const sampleInput = `$ cd /
-$ ls
+export const sampleInput = `$ ls
 dir a
 14848514 b.txt
 8504156 c.dat
