@@ -1,6 +1,6 @@
 import { realInput, sampleInput } from "./input.js";
 
-
+console.time()
 const array = realInput.split('\n').map(x => x.split(''))
 const rows = array.length
 const cols = array[0].length
@@ -67,3 +67,4 @@ console.timeEnd('Part1 Time:')
 console.time('Part2 Time:')
 console.log("Part 2: ", sol2);
 console.timeEnd('Part2 Time:')
+console.timeEnd()

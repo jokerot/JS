@@ -8,7 +8,13 @@ v>v.vv.v..
 v.v..>>v.v
 ....v..v.>`
 
-
+export const littleInput = `...>...
+.......
+......>
+v.....>
+......>
+.......
+..vvv..`
 
 export const realInput = `.v>>..v.v.>......>.vv.v...v.vvvvv....v>..>v>v....>>.....>vv..v..>>..>..vvv..v.>........>.>>>.v.>>>v>v.vv>>>>..v.v>>v>.v>..>vvv..>v>v...>>.v
 ..vv..>v.v...>.v.v..v.>.v.v.........v.>v>>...>.>>..>v.v>.....vv>.vv..>....>.vv...vv.v.>>v>v>.v.vv...v.vv..v>v...>.v>...>v>v>vvvvv>>.>v.v.v.
