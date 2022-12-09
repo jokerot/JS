@@ -59,18 +59,19 @@ const sum = () => {
 
 sum();
 const spaceToFree = rootSize - 40000000;
-const dirs = listAll.filter(x => x.type == "dir" && x.size>spaceToFree).sort((a,b) => a.size - b.size)
+const dirs = listAll.filter(x => x.type == "dir" && x.size > spaceToFree).sort((a, b) => a.size - b.size)
 
-const sol1 = listAll.filter(x=>x.size<100000 && x.type=="dir" && x.name!="root")
-.reduce((sum, y) => sum + y.size, 0)
-const sol2 = (input) => 1
+const sol1 = listAll.filter(x => x.size < 100000 && x.type == "dir" && x.name != "root")
+    .reduce((sum, y) => sum + y.size, 0)
+    
+const sol2 = dirs[0].size
 
 
 
 console.time('Part1 Time:')
-console.log("Part 1: ", sol1(realInput));
+console.log("Part 1: ", sol1);
 console.timeEnd('Part1 Time:')
 
 console.time('Part2 Time:')
-console.log("Part 2: ", sol2(realInput));
+console.log("Part 2: ", sol2);
 console.timeEnd('Part2 Time:')
