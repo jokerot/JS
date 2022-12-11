@@ -1,4 +1,4 @@
-import { realInput, sampleInput, sampleInput2, sampleInput3, sampleInput4, sampleInput5 } from "./input.js";
+import { realInput, sampleInput, sampleInput2, sampleInput3, sampleInput4, sampleInput5, sampleInput6 } from "./input.js";
 const start = Date.now();
 
 const hexa = n => parseInt(n, 2).toString(16).toUpperCase();
@@ -44,7 +44,7 @@ const operation = (operand, arr) => {
 
 // let packet = convertToBin(sampleInput2).split('')
 
-const readPacket = (packet, onlyOnce) => {
+const readPacket = (packet, onlyOnce, currStackValues = []) => {
     let value = 0
     let version = binToInt(packet.splice(0, 3))
     counterVersions += version
@@ -63,26 +63,26 @@ const readPacket = (packet, onlyOnce) => {
         let _;
         if (lengthType === '0') {
             let totalLength = binToInt(packet.splice(0, 15));
-            [ _, value ] = readPacket(packet.splice(0, totalLength), 0)
-
+            [ _, value, currStackValues ] = readPacket(packet.splice(0, totalLength), 0, [value, ...currStackValues])
+            value = operation(id, currStackValues)
         }
         if (lengthType === '1') {
             let values = []
             let numPackets = binToInt(packet.splice(0, 11))
             for (let i = 0; i < numPackets; i++) {
-                [ packet, value ] = readPacket(packet, 1);
+                [ packet, value, currStackValues ] = readPacket(packet, 1, [value, ...currStackValues]);
                 values.push(value)
             }
             value = operation(id, values)
         }
     }
-    if (packet.filter(x => x != '0').length > 0 && !onlyOnce) readPacket(packet, 0)
-    return [ packet, value ]
+    if (packet.filter(x => x != '0').length > 0 && !onlyOnce) readPacket(packet, 0, [value, ...currStackValues])
+    return [ packet, value, [value, ...currStackValues] ]
 
 }
 
 // console.log(convertToBin(sampleInput));
 // console.log(readPacket(convertToBin(sampleInput).split('')));
-console.log(readPacket(convertToBin(sampleInput5).split(''), 0));
+console.log(readPacket(convertToBin(sampleInput6).split(''), 0));
 
 console.log("Time spent: ", Date.now() - start, " ms")
