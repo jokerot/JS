@@ -39,16 +39,15 @@ const sol1 = monkeys => {
 }
 
 const sol2 = monkeys => {
+    const nzs = monkeys.reduce((nzs, x) => nzs * x.divider, 1)
     for (let i = 1; i <= 10000; i++) {
         for (let j = 0; j < monkeys.length; j++) {
             const monkey = monkeys[j];
             for (let k = 0; k < monkey.items.length; k++) {
                 const item = monkey.items[k]
                 let w = isNaN(monkey.worry) ? item * item : monkey.operation == "*" ? item * parseInt(monkey.worry) : (item + parseInt(monkey.worry))
+                w = w % nzs
                 if (w % monkey.divider == 0) {
-                    // while (w % monkey.divider == 0) {
-                    //     w = w/monkey.divider
-                    // }
                     monkeys[monkey.trueMonkey].items.push(w)
                 }
                 else monkeys[monkey.falseMonkey].items.push(w)
@@ -56,7 +55,6 @@ const sol2 = monkeys => {
             }
             monkey.items = []
         }
-        if ([1,20,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000].includes(i)) console.log( "i = ", i, "monkeys: ", monkeys);
     }
 
     return monkeys.sort((a, b) => a.count - b.count).slice(-2).reduce((m, x) => m * x.count, 1)
@@ -68,7 +66,7 @@ console.log("Part 1: ", sol1(getMmonkeys(realInput.split('\n\n'))));
 console.timeEnd('Part1 Time:')
 
 console.time('Part2 Time:')
-console.log("Part 2: ", sol2(getMmonkeys(sampleInput.split('\n\n'))));
+console.log("Part 2: ", sol2(getMmonkeys(realInput.split('\n\n'))));
 console.timeEnd('Part2 Time:')
 
 console.timeEnd()
