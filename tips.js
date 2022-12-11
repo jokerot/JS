@@ -1,6 +1,10 @@
 //create array with prefilled spots
 
 new Array(n).fill('#')
+//multidimesional Array
+const newArr = Array.from(Array(sArr.length), () => {
+  return new Array(sArr[0].length).fill(".")
+})
 
 function createBinaryString (nMask) {
     // nMask must be between -2147483648 and 2147483647
