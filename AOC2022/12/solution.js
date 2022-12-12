@@ -20,7 +20,7 @@ const valuesArray = Array.from(Array(rows), () => {
 valuesArray[20][0] = 0
 let changed = true
 
-const populate = (x, y, value) => {
+const populate = (x, y, value, valuesArray) => {
     let ch = false
     if (x > 0 && matrix[x - 1][y] <= matrix[x][y] + 1 ) {
         if (valuesArray[x - 1][y] > value || !(valuesArray[x - 1][y] >= 0)) {
@@ -68,11 +68,43 @@ const sol1 = () => {
     return valuesArray[eX][eY]
 }
 
-const sol2 = input => 1
+const solT = (s1, s2) => {
+    const valuesArray2 = Array.from(Array(rows), () => {
+        return new Array(cols).fill(-1)
+    })
+    valuesArray2[s1][s2] = 0
+    while (changed) {
+        changed = false
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                if (valuesArray2[i][j] >= 0) {
+                    populate(i, j, valuesArray2[i][j] + 1, valuesArray2)
+                }
 
-console.time('Part1 Time:')
-console.log("Part 1: ", sol1());
-console.timeEnd('Part1 Time:')
+            }
+
+        }
+    }
+    return valuesArray2[eX][eY]
+}
+
+const sol2 = () => {
+    let min = 20000
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            changed = true
+            if (matrix[i][j] == 0) {
+                const count = solT(i, j)
+                min = (min > count && count > -1 ) ? count  : min
+            }
+        }
+    }
+    return min
+}
+
+// console.time('Part1 Time:')
+// console.log("Part 1: ", sol1());
+// console.timeEnd('Part1 Time:')
 
 console.time('Part2 Time:')
 console.log("Part 2: ", sol2(sampleInput.split('\n\n')));
