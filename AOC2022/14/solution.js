@@ -33,15 +33,15 @@ const buildCave = input => {
     return caves
 }
 
-const moveSand = (x, y, arr) => {
-    if (x>170) return [true, x, y]
+const moveSnowlake = (x, y, arr) => {
     if (arr[x + 1][y] == '.') return [false, x + 1, y]
     if (arr[x + 1][y - 1] == '.') return [false, x + 1, y - 1]
     if (arr[x + 1][y + 1] == '.') return [false, x + 1, y + 1]
     return [true, x, y]
 }
 
-const moveSand2 = (x, y, arr) => {
+const moveSnowlake2 = (x, y, arr) => {
+    if (x>170) return [true, x, y]
     if (arr[x + 1][y] == '.') return [false, x + 1, y]
     if (arr[x + 1][y - 1] == '.') return [false, x + 1, y - 1]
     if (arr[x + 1][y + 1] == '.') return [false, x + 1, y + 1]
@@ -56,7 +56,7 @@ const sol1 = () => {
         let newSnowflake = [0, 500]
         let rest = false;
         while (!rest) {
-            let res = moveSand(...newSnowflake, caveMatrix)
+            let res = moveSnowlake(...newSnowflake, caveMatrix)
             rest = res[0]
             if (rest) {
                 caveMatrix[newSnowflake[0]][newSnowflake[1]] = 'o'
@@ -88,7 +88,7 @@ const sol2 = () => {
         let newSnowflake = [0, 500]
         let rest = false;
         while (!rest) {
-            let res = moveSand(...newSnowflake, caveMatrix)
+            let res = moveSnowlake2(...newSnowflake, caveMatrix)
             rest = res[0]
             if (rest) {
                 // console.log(newSnowflake[0],newSnowflake[1]);
