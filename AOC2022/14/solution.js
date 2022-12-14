@@ -71,10 +71,6 @@ const sol1 = () => {
         }
     }
 
-    // caveMatrix.forEach(element => {
-    //     console.log(element)
-    // });
-
     return count
 }
 
@@ -94,10 +90,6 @@ const sol2 = () => {
                 // console.log(newSnowflake[0],newSnowflake[1]);
                 caveMatrix[newSnowflake[0]][newSnowflake[1]] = 'o'
                 count++
-            }
-            else if (res[1] > 198) {
-                endlessVoid = true
-                break
             } else {
                 newSnowflake = [res[1], res[2]]
             }
