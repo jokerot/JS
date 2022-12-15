@@ -17,7 +17,7 @@ const buildCave = input => {
             const [Y1, X1] = moves[i - 1].split(',').map(x => +x)
             const [Y2, X2] = moves[i].split(',').map(x => +x)
             const [sX, eX] = X1 <= X2 ? [X1, X2] : [X2, X1]
-            const [sY, eY] = Y1<=Y2 ? [Y1, Y2] : [Y2, Y1]
+            const [sY, eY] = Y1 <= Y2 ? [Y1, Y2] : [Y2, Y1]
             // const [sY, eY] = Y1 <= Y2 ? [Y1 - 475, Y2 - 475] : [Y2 - 475, Y1 - 475]
             for (let j = sX; j <= eX; j++) {
                 for (let k = sY; k <= eY; k++) {
@@ -41,7 +41,7 @@ const moveSnowlake = (x, y, arr) => {
 }
 
 const moveSnowlake2 = (x, y, arr) => {
-    if (x>170) return [true, x, y]
+    if (x > 170) return [true, x, y]
     if (arr[x + 1][y] == '.') return [false, x + 1, y]
     if (arr[x + 1][y - 1] == '.') return [false, x + 1, y - 1]
     if (arr[x + 1][y + 1] == '.') return [false, x + 1, y + 1]
