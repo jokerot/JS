@@ -1,12 +1,16 @@
 import { realInput, sampleInput } from "./input.js";
 console.time()
 
-const startArray = realInput.split('\n').map(x => parseInt(x))
-const arrLength = startArray.length
+const startArray = realInput.split('\n').reduce((obj, x, i) => ({...obj, [i]: parseInt(x)}), {})
+const arrLength = 5000
 
-const moveNumber = (arr, n) => {
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+  }
 
-    let oldPos = arr.indexOf(n);
+const moveNumber = (arr, i) => {
+    const n = startArray[i];
+    let oldPos = arr.indexOf(i);
     let newPos = n < 0 ? (oldPos + n + arrLength - 1) % arrLength : (oldPos + n) % arrLength
     if (n > 0){
     newPos += Math.floor((oldPos + n) / arrLength)
@@ -16,9 +20,9 @@ const moveNumber = (arr, n) => {
     // }
     if (oldPos > newPos) {
             arr.splice(oldPos, 1)
-            arr.splice(newPos, 0, n)
+            arr.splice(newPos, 0, i)
         } else {
-            arr.splice(newPos + 1, 0, n)
+            arr.splice(newPos + 1, 0, i)
             arr.splice(oldPos, 1)
 
         }
@@ -26,13 +30,13 @@ const moveNumber = (arr, n) => {
 
 const rearrange = arr => {
     for (let i = 0; i < arrLength; i++) {
-        moveNumber(arr, startArray[i])
+        moveNumber(arr, i)
         // console.log(startArray[i], arr);
     }
     return arr;
 }
 
-const newArray = [...startArray]
+const newArray = [...Array(arrLength).keys()]
 
 rearrange(newArray)
 
