@@ -35,8 +35,7 @@ const sol1 = yell("root")
 const sol2 = () => {
     let toMatch = yell("qrgn")
     let iHigh = 3755000000000
-    let iLow = 3555000000000
-    let c = 0
+    let iLow = 0
     let i, delta
     while (true) {
         delta = Math.floor((iHigh - iLow) / 2)
@@ -49,9 +48,7 @@ const sol2 = () => {
         if (a < toMatch) {
             iHigh = iLow + delta
         } else iLow = iLow + delta
-        if (c % 100000 == 0) console.log(i, a, toMatch)
         i++
-        c++
     }
 }
 
