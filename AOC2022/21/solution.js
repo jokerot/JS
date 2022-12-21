@@ -46,9 +46,8 @@ const sol2 = () => {
             return i
         }
         if (a < toMatch) {
-            iHigh = iLow + delta
-        } else iLow = iLow + delta
-        i++
+            iHigh = i
+        } else iLow = i
     }
 }
 
