@@ -8,39 +8,38 @@ const valves = realInput.split('\n')
 let maxScore = 0
 const objValves = valves.reduce((obj, x) => ({ ...obj, [x[0]]: { value: x[1], connectedValves: x[2] } }), {})
 let allSolutions = []
-const nextStep = (currValve, movesLeft, lastValve, currentValvesObj, currentMovesArr, currScore) => {
+const nextStep = (currValve, movesLeft, lastValve, currentValvesObj, currScore) => {
     movesLeft--
-    if (movesLeft <= 1) {
+    if (movesLeft <= 1 || checkValvesAllOpen(currentValvesObj)) {
         if (maxScore < currScore) {
             maxScore = currScore
             console.log("Max1", maxScore)
         }
-        allSolutions = currentMovesArr
         return
     }
 
-    
-    currentValvesObj[currValve].connectedValves.forEach(v => {
-        if (v != lastValve)
-        nextStep(v, movesLeft, currValve, JSON.parse(JSON.stringify(currentValvesObj)), [...currentMovesArr, v], currScore)
-    });
-    
     if (currentValvesObj[currValve].value > 0) {
-        movesLeft--
-        currScore += currentValvesObj[currValve].value * movesLeft
+        const tempMoves = movesLeft - 1
+        const tempScore = currScore + currentValvesObj[currValve].value * movesLeft
         const tempValvesObj = JSON.parse(JSON.stringify(currentValvesObj))
         tempValvesObj[currValve].value = 0
         currentValvesObj[currValve].connectedValves.forEach(v => {
-            nextStep(v, movesLeft, currValve, tempValvesObj, [...currentMovesArr, v], currScore)
+            nextStep(v, tempMoves, currValve, tempValvesObj, tempScore)
         });
+        
     }
+
+    currentValvesObj[currValve].connectedValves.forEach(v => {
+        if (v != lastValve)
+            nextStep(v, movesLeft, currValve, JSON.parse(JSON.stringify(currentValvesObj)), currScore)
+    });
+
 
     if (movesLeft <= 1) {
         if (maxScore < currScore) {
             maxScore = currScore
             console.log("Max2", maxScore)
         }
-        allSolutions = currentMovesArr
         return
     }
 }
@@ -52,7 +51,7 @@ const checkValvesAllOpen = (v) => {
     return true
 }
 
-nextStep("AA", 31, '', objValves, ["AA"], 0)
+nextStep("AA", 31, '', objValves, 0)
 console.log("FINAL ANSWER:", maxScore)
 
 // allSolutions.sort((a, b) => a[0] - b[0])
