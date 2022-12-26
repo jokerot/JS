@@ -17,36 +17,48 @@ const toValue = a => {
     }
 }
 
-const numbers = sampleInput.split('\n').map(x => x.split('').map(y => toValue(y)).reverse())
+const toS = a => {
+    switch (a) {
+        case -1:
+            return "-"
+            break;
+
+        case -2:
+            return "="
+            break;
+
+        default:
+            return a.toString()
+    }
+}
+
+const numbers = realInput.split('\n').map(x => x.split('').map(y => toValue(y)).reverse())
 const toDecimal = arr => arr.reduce((sum, x, i) => sum + x * (5) ** i, 0)
 
 const toSnafu = n => {
-    let guess = 0
-    let i = 0
-    let val = 0
-    while (true) {
-        i++;
-        if (2 * i ** 5 > n) break;
-    }
-    guess = 2 * i ** 5
-    val = 2
-
-
-    for (let j = -2; j < 2; j++) {
-        if (Math.abs(guess - n) > Math.abs(j * i ** 5 - n)) {
-            guess = j * i ** 5 - n
-            val = j
+    const arr = []
+    let remember = 0
+    let mod, left
+    while (n > 0) {
+        mod = n%5
+        left = (n - mod) / 5
+        mod = mod + remember
+        remember = 0
+        if (mod<=2) arr.unshift(toS(mod))
+        else {
+            arr.unshift(toS(mod-5))
+            remember = 1
         }
+        n = left
     }
-    return [val, n - guess]
+    return arr.join('')
 }
-
-toSnafu(4890)
 
 const sol1 = () => {
 
     const n = numbers.map((x) => toDecimal(x))
-    return n.reduce((s, x) => s + x, 0)
+    let sum = n.reduce((s, x) => s + x, 0)
+    return toSnafu(sum)
 
 }
 const sol2 = () => 1
