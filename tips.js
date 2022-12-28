@@ -42,3 +42,5 @@ function isNumber(char) {
 const isUnique = m => ([...new Set(m.split(''))].join('') === m)
 
 isNaN //is not a number
+//transpose
+transpose = m => m[0].map((x,i) => m.map(x => x[i]))
