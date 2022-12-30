@@ -1,4 +1,4 @@
-import { realInput, sampleInput } from "./input.js";
+import { kosta, realInput, sampleInput } from "./input.js";
 console.time()
 
 function createNDimArray(dimensions) {
@@ -16,9 +16,9 @@ function createNDimArray(dimensions) {
 }
 
 
-const cubes = realInput.split('\n').map(x => x.split(','))
-const size = 22
-const myCubes = createNDimArray([size + 2, size + 2, size + 2])
+const cubes = realInput.split('\n').map(x => x.split(',').map(y => +y + 1))
+const size = 24
+const myCubes = createNDimArray([size, size, size])
 let sides = 0
 
 const sol1 = () => {
@@ -47,7 +47,7 @@ const checkCube = (a, b, c) => {
             if (myCubes[a - 1][b][c] == -1) checkCube(a - 1, b, c)
         }
     }
-    if (a <= size) {
+    if (a < size-1) {
         if (cubes.some(x => x[0] == a + 1 && x[1] == b && x[2] == c)) {
             sides++
             myCubes[a + 1][b][c] = 0
@@ -63,7 +63,7 @@ const checkCube = (a, b, c) => {
             if (myCubes[a][b - 1][c] == -1) checkCube(a, b - 1, c)
         }
     }
-    if (b <= size) {
+    if (b < size-1) {
         if (cubes.some(x => x[0] == a && x[1] == b + 1 && x[2] == c)) {
             sides++
             myCubes[a][b + 1][c] = 0
@@ -79,7 +79,7 @@ const checkCube = (a, b, c) => {
             if (myCubes[a][b][c - 1] == -1) checkCube(a, b, c - 1)
         }
     }
-    if (c <= size) {
+    if (c <size-1) {
         if (cubes.some(x => x[0] == a && x[1] == b && x[2] == c + 1)) {
             sides++
             myCubes[a][b][c + 1] = 0
@@ -91,7 +91,7 @@ const checkCube = (a, b, c) => {
 
 }
 
-checkCube(0, 10, 1)
+checkCube(22, 22, 22)
 
 // const sol2 = () => {
 //     let airCounter = 0
