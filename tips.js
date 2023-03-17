@@ -44,3 +44,15 @@ const isUnique = m => ([...new Set(m.split(''))].join('') === m)
 isNaN //is not a number
 //transpose
 transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+
+
+//NEW TIPS from lessons
+
+const str = "BlahBlahBlah"
+
+str.length  ///predefined property
+str.toLowerCase()  //method
+str.at(-1)   //character at index, can receive negative values
+str.substring(1,4) //new method, replaces deprecated "substr"
+
+let nb = 1_000_000; // the "_" is taken out when calculating
