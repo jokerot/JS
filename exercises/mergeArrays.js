@@ -15,7 +15,7 @@ const p = ["view", "create", "update"]
 const mergePermissions = (p1, p2) => {
     const obj = {};
     p.forEach(pm => {
-        obj[pm] = p1[pm] || p2[pm]
+        obj[pm] = p1[pm] || p2[pm] || false
     });
     return obj
 }
